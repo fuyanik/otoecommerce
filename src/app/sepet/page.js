@@ -270,6 +270,11 @@ export default function CartPage() {
                 <Link href={`/urun/${item.id}`}>
                   <h3 className="font-medium text-sm text-gray-900 line-clamp-2 mb-1">{item.name}</h3>
                 </Link>
+                {item.selectedSize && (
+                  <span className="inline-block px-2 py-0.5 bg-gray-100 text-gray-600 text-xs font-medium rounded mb-1">
+                    Beden: {item.selectedSize}
+                  </span>
+                )}
                 <p className="text-lg font-bold text-gray-900 mb-3">{formatPrice(item.price)}</p>
 
                 {/* Quantity & Delete */}

@@ -41,12 +41,20 @@ export default function ProductPage({ params }) {
   
   const [product, setProduct] = useState(null);
   const [quantity, setQuantity] = useState(1);
+  const [selectedSize, setSelectedSize] = useState(null);
   const [showSuccessToast, setShowSuccessToast] = useState(false);
   const [isAddedToCart, setIsAddedToCart] = useState(false);
   const [relatedProducts, setRelatedProducts] = useState([]);
   const [expandedFaq, setExpandedFaq] = useState(null);
   const [timeUntilMidnight, setTimeUntilMidnight] = useState({ hours: 0, minutes: 0 });
   const { addToCart, isInCart, getCartItem } = useCart();
+
+  // Beden seçimi gerektiren kategoriler
+  const sizableCategories = ['kasklar', 'giyim-urunleri', 'eldiven'];
+  const sizes = ['XS', 'S', 'M', 'L', 'XL'];
+  
+  // Bu ürün beden seçimi gerektiriyor mu?
+  const requiresSize = product && sizableCategories.includes(product.category);
   const { isInWishlist, toggleWishlist } = useWishlist();
 
   // Calculate time until midnight
@@ -99,7 +107,18 @@ export default function ProductPage({ params }) {
 
   const handleAddToCart = () => {
     if (product) {
-      addToCart(product, quantity);
+      // Beden seçimi gerektiren kategorilerde beden seçilmemiş ise uyarı ver
+      if (requiresSize && !selectedSize) {
+        alert('Lütfen bir beden seçin');
+        return;
+      }
+      
+      // Beden bilgisini ürüne ekle
+      const productWithSize = requiresSize 
+        ? { ...product, selectedSize } 
+        : product;
+      
+      addToCart(productWithSize, quantity);
       setShowSuccessToast(true);
       
       // Hide toast after 10 seconds and show bottom navbar
@@ -199,7 +218,9 @@ export default function ProductPage({ params }) {
                   </div>
                   <div className="flex-1 text-left">
                     <p className="font-medium text-gray-900 text-sm line-clamp-1">{product.name}</p>
-                    <p className="text-gray-500 text-xs">{quantity} adet</p>
+                    <p className="text-gray-500 text-xs">
+                      {quantity} adet{selectedSize && ` • Beden: ${selectedSize}`}
+                    </p>
                   </div>
                   <span className="font-bold text-gray-900">{formatPrice(product.price * quantity)}</span>
                 </motion.div>
@@ -361,9 +382,55 @@ export default function ProductPage({ params }) {
         </div>
         
         {/* Lowest Price Badge */}
-        <div className="flex items-center gap-1.5 mb-6">
+        <div className="flex items-center gap-1.5 mb-4">
           <span className="text-xs text-green-600 font-medium">✓ Son 14 Günün En Düşük Fiyatı!</span>
         </div>
+
+        {/* Size Selector - Sadece beden gerektiren kategoriler için */}
+        {requiresSize && (
+          <div className="mb-6">
+            <div className="flex items-center justify-between mb-3">
+              <h3 className="font-semibold text-gray-900">Beden Seçimi</h3>
+              {!selectedSize && (
+                <span className="text-xs text-red-500 font-medium">* Zorunlu</span>
+              )}
+            </div>
+            <div className="flex gap-2">
+              {sizes.map((size) => (
+                <motion.button
+                  key={size}
+                  whileTap={{ scale: 0.95 }}
+                  onClick={() => setSelectedSize(size)}
+                  className={`relative flex-1 h-12 rounded-xl font-semibold text-sm transition-all border-2 ${
+                    selectedSize === size
+                      ? 'bg-gray-900 text-white border-gray-900 shadow-lg'
+                      : 'bg-white text-gray-700 border-gray-200 hover:border-gray-400'
+                  }`}
+                >
+                  {size}
+                  {selectedSize === size && (
+                    <motion.div
+                      initial={{ scale: 0 }}
+                      animate={{ scale: 1 }}
+                      className="absolute -top-1 -right-1 w-5 h-5 bg-green-500 rounded-full flex items-center justify-center"
+                    >
+                      <HiCheck className="w-3 h-3 text-white" />
+                    </motion.div>
+                  )}
+                </motion.button>
+              ))}
+            </div>
+            {selectedSize && (
+              <motion.p 
+                initial={{ opacity: 0, y: -5 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="text-sm text-gray-500 mt-2"
+              >
+                Seçilen beden: <span className="font-semibold text-gray-900">{selectedSize}</span>
+              </motion.p>
+            )}
+          </div>
+        )}
 
         {/* In Cart Badge */}
         {isAddedToCart && cartItem && (
@@ -581,18 +648,28 @@ export default function ProductPage({ params }) {
             transition={{ type: 'spring', damping: 20, stiffness: 300 }}
             className="fixed bottom-0 left-0 right-0 z-40 bg-white border-t border-gray-100 p-4 shadow-lg"
           >
+            {/* Beden seçilmedi uyarısı */}
+            {requiresSize && !selectedSize && (
+              <motion.div
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                className="mb-3 p-3 bg-amber-50 border border-amber-200 rounded-xl flex items-center gap-2"
+              >
+                <span className="text-amber-600 text-sm font-medium">⚠️ Lütfen önce bir beden seçin</span>
+              </motion.div>
+            )}
             <motion.button
               whileTap={{ scale: 0.98 }}
               onClick={handleAddToCart}
-              disabled={product.stock === 0}
+              disabled={product.stock === 0 || (requiresSize && !selectedSize)}
               className={`relative w-full h-14 rounded-2xl font-semibold text-lg flex items-center justify-center gap-3 transition-all shadow-xl overflow-hidden ${
-                product.stock === 0 
+                product.stock === 0 || (requiresSize && !selectedSize)
                   ? 'bg-gray-200 text-gray-400 cursor-not-allowed'
                   : 'bg-gradient-to-r from-gray-900 via-slate-800 to-indigo-900 text-white'
               }`}
             >
               {/* Shine effect */}
-              {product.stock > 0 && (
+              {product.stock > 0 && !(requiresSize && !selectedSize) && (
                 <motion.div
                   className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -skew-x-12"
                   animate={{
@@ -607,7 +684,13 @@ export default function ProductPage({ params }) {
                 />
               )}
               <HiOutlineShoppingBag className="w-6 h-6 relative z-10" />
-              <span className="relative z-10">{product.stock === 0 ? 'Tükendi' : 'Sepete Ekle'}</span>
+              <span className="relative z-10">
+                {product.stock === 0 
+                  ? 'Tükendi' 
+                  : requiresSize && !selectedSize 
+                    ? 'Beden Seçin' 
+                    : 'Sepete Ekle'}
+              </span>
               <span className="px-3 py-1 bg-white/10 rounded-lg text-sm relative z-10 border border-white/20">
                 {formatPrice(product.price * quantity)}
               </span>
