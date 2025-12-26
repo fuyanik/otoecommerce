@@ -67,8 +67,8 @@ export default function Footer() {
 
       {/* Main Footer Content */}
       <div className='w-full flex flex-col items-center pt-6 pb-10 px-4'>
-      <Image src="/logo3.png" alt="Logo" width={180} height={190} />
-      <p className='text-gray-500 -mt-8 text-sm mb-6'>Müşteri Hizmetleri | Çağrı Hattı</p>
+       <Image src="/logo3.png" alt="Logo" width={180} height={190} />
+      <p className='text-gray-500 mt-2 text-sm mb-6'>Müşteri Hizmetleri | Çağrı Hattı</p>
       
       {/* WhatsApp Button */}
       <a

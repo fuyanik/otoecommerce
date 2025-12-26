@@ -39,8 +39,8 @@ function Logo() {
         <Image 
           src="/logo3.png" 
           alt="Logo" 
-          width={150} 
-          height={150}
+          width={80} 
+          height={80}
           priority
           unoptimized
         />
