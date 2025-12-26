@@ -154,6 +154,68 @@ export default function HomePage() {
         </Swiper>
       </section>
 
+       {/* Selected For You - Haftanın Öne Çıkan Ürünleri */}
+       {selectedForYouProducts.length > 0 && (
+        <section className="py-8 bg-gradient-to-b from-pink-50/50 to-gray-50">
+          <div className="max-w-7xl mx-auto">
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6 px-4">
+              <div className="flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
+                  <HiOutlineSparkles className="w-5 h-5 text-white" />
+                </div>
+                <div>
+                  <h2 className="text-xl font-bold text-gray-900">Ayın Süper İndirimleri</h2>
+                  <p className="text-sm text-gray-500">Sizin için özel seçimler</p>
+                </div>
+              </div>
+              <Link 
+                href="/kategoriler" 
+                className="hidden sm:flex items-center gap-1 px-4 py-2 bg-purple-50 text-purple-600 rounded-full text-sm font-medium hover:bg-purple-100 transition-colors"
+              >
+                Tümünü Gör <HiOutlineChevronRight className="w-4 h-4" />
+              </Link>
+            </div>
+            
+            {/* Swiper Carousel */}
+            <div className="relative group">
+              <Swiper
+                modules={[FreeMode]}
+                spaceBetween={16}
+                slidesPerView={2.2}
+                freeMode={true}
+                grabCursor={true}
+                className="!px-4"
+                breakpoints={{
+                  480: { slidesPerView: 2.5, spaceBetween: 16 },
+                  640: { slidesPerView: 3.2, spaceBetween: 16 },
+                  768: { slidesPerView: 3.5, spaceBetween: 20 },
+                  1024: { slidesPerView: 4.5, spaceBetween: 20 },
+                  1280: { slidesPerView: 5.2, spaceBetween: 24 },
+                }}
+              >
+                {selectedForYouProducts.map((product, index) => (
+                  <SwiperSlide key={product.id}>
+                    <motion.div
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: index * 0.05 }}
+                    >
+                      <ProductCard product={product} index={index} />
+                    </motion.div>
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+              
+              {/* Gradient Fade Effects */}
+              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-pink-50/50 to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
+              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+            </div>
+          </div>
+        </section>
+      )}
+
+
       {/* Featured Products - Kışın En Güçlü Kaskları */}
       {featuredProducts.length > 0 && (
         <section className="py-8 bg-gradient-to-b from-white to-gray-50">
@@ -414,67 +476,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Selected For You - Haftanın Öne Çıkan Ürünleri */}
-      {selectedForYouProducts.length > 0 && (
-        <section className="py-8 bg-gradient-to-b from-pink-50/50 to-gray-50">
-          <div className="max-w-7xl mx-auto">
-            {/* Header */}
-            <div className="flex items-center justify-between mb-6 px-4">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-purple-500 to-violet-600 flex items-center justify-center shadow-lg shadow-purple-500/30">
-                  <HiOutlineSparkles className="w-5 h-5 text-white" />
-                </div>
-                <div>
-                  <h2 className="text-xl font-bold text-gray-900">Haftanın Öne Çıkan Ürünleri</h2>
-                  <p className="text-sm text-gray-500">Sizin için özel seçimler</p>
-                </div>
-              </div>
-              <Link 
-                href="/kategoriler" 
-                className="hidden sm:flex items-center gap-1 px-4 py-2 bg-purple-50 text-purple-600 rounded-full text-sm font-medium hover:bg-purple-100 transition-colors"
-              >
-                Tümünü Gör <HiOutlineChevronRight className="w-4 h-4" />
-              </Link>
-            </div>
-            
-            {/* Swiper Carousel */}
-            <div className="relative group">
-              <Swiper
-                modules={[FreeMode]}
-                spaceBetween={16}
-                slidesPerView={2.2}
-                freeMode={true}
-                grabCursor={true}
-                className="!px-4"
-                breakpoints={{
-                  480: { slidesPerView: 2.5, spaceBetween: 16 },
-                  640: { slidesPerView: 3.2, spaceBetween: 16 },
-                  768: { slidesPerView: 3.5, spaceBetween: 20 },
-                  1024: { slidesPerView: 4.5, spaceBetween: 20 },
-                  1280: { slidesPerView: 5.2, spaceBetween: 24 },
-                }}
-              >
-                {selectedForYouProducts.map((product, index) => (
-                  <SwiperSlide key={product.id}>
-                    <motion.div
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
-                    >
-                      <ProductCard product={product} index={index} />
-                    </motion.div>
-                  </SwiperSlide>
-                ))}
-              </Swiper>
-              
-              {/* Gradient Fade Effects */}
-              <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-pink-50/50 to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
-              <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
-            </div>
-          </div>
-        </section>
-      )}
-
+     
       {/* Categories - Modern Design with Images */}
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto">
