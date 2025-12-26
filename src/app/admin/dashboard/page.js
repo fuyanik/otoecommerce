@@ -22,7 +22,8 @@ import {
   HiOutlineDeviceMobile,
   HiOutlineGlobe,
   HiOutlineLocationMarker,
-  HiOutlineClock
+  HiOutlineClock,
+  HiOutlinePhotograph
 } from 'react-icons/hi';
 import { collection, query, orderBy, limit, onSnapshot } from 'firebase/firestore';
 import { db } from '@/lib/firebase';
@@ -252,7 +253,7 @@ export default function AdminDashboard() {
           </div>
 
           {/* Quick Actions */}
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-4 py-4">
+          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-7 gap-4 py-4">
             <Link href="/admin/products" className="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
               <HiOutlineShoppingBag className="w-6 h-6 text-gray-400 group-hover:text-red-500 mb-2 transition-colors" />
               <p className="font-semibold text-gray-900">Ürünler</p>
@@ -272,6 +273,11 @@ export default function AdminDashboard() {
               <HiOutlineTemplate className="w-6 h-6 text-gray-400 group-hover:text-purple-500 mb-2 transition-colors" />
               <p className="font-semibold text-gray-900">Ana Sayfa</p>
               <p className="text-sm text-gray-500">Bölüm düzenle</p>
+            </Link>
+            <Link href="/admin/categories" className="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
+              <HiOutlinePhotograph className="w-6 h-6 text-gray-400 group-hover:text-indigo-500 mb-2 transition-colors" />
+              <p className="font-semibold text-gray-900">Kategoriler</p>
+              <p className="text-sm text-gray-500">Resim düzenle</p>
             </Link>
             <Link href="/admin/settings" className="p-4 bg-white border border-gray-100 rounded-2xl shadow-sm hover:shadow-md transition-shadow group">
               <HiOutlineCog className="w-6 h-6 text-gray-400 group-hover:text-green-500 mb-2 transition-colors" />

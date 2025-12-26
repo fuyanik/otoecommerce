@@ -7,7 +7,7 @@ import { HiOutlineHeart, HiHeart, HiOutlineShoppingCart } from 'react-icons/hi';
 import { useWishlist } from '@/context/WishlistContext';
 import { useCart } from '@/context/CartContext';
 
-// Pastel background colors for products
+// Pastel background colors for products - iOS Style
 const pastelColors = [
   'bg-pink-50',
   'bg-blue-50', 

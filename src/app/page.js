@@ -9,36 +9,46 @@ import { Autoplay, Pagination, FreeMode } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/free-mode';
-import { HiOutlineChevronRight, HiOutlineChevronLeft, HiOutlineTruck, HiOutlineShieldCheck, HiOutlineCreditCard, HiOutlineSupport, HiOutlineFire, HiOutlineUserGroup, HiOutlineEye, HiOutlineAcademicCap, HiOutlineHeart, HiOutlineSparkles, HiOutlinePrinter } from 'react-icons/hi';
+import { 
+  HiOutlineChevronRight, 
+  HiOutlineTruck, 
+  HiOutlineShieldCheck, 
+  HiOutlineCreditCard, 
+  HiOutlineSupport, 
+  HiOutlineHeart, 
+  HiOutlineSparkles,
+  HiOutlineStar
+} from 'react-icons/hi';
+import { GiFullMotorcycleHelmet } from 'react-icons/gi';
 import ProductCard from '@/components/ProductCard';
 import Footer from '@/components/Footer';
 import { useProducts } from '@/context/ProductsContext';
-import yilsonu from '@/assets/yilsonu.png';
-import main1 from '@/assets/main1.png';
-import main2 from '@/assets/main2.png';
-import main3 from '@/assets/main3.png';
-import main4 from '@/assets/main4.png';
+
+// Motorsiklet temalı hero slides
 const heroSlides = [
   {
-    title: 'Yazıcı',
-    subtitle: 'Ofis için profesyonel yazıcı çözümleri',
+    title: 'Kasklar',
+    subtitle: 'Güvenliğiniz için en kaliteli kask modelleri',
     discount: '🔥 %45 İndirim',
-    image: 'https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=1200',
-    link: '/kategori/yazici'
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1200',
+    link: '/kategori/kasklar',
+    gradient: 'from-slate-900/90 via-slate-800/80 to-transparent'
   },
   {
-    title: 'Çalışma Koltukları',
-    subtitle: 'Rahat ve ergonomik ofis koltukları',
-    discount: '💼 %50 İndirim',
-    image: 'https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1200',
-    link: '/kategori/koltuk-takimi'
+    title: 'Giyim Ürünleri',
+    subtitle: 'Koruyucu mont, pantolon ve kombinler',
+    discount: '🏍️ %50 İndirim',
+    image: 'https://images.unsplash.com/photo-1609630875171-b1321377ee65?w=1200',
+    link: '/kategori/giyim-urunleri',
+    gradient: 'from-slate-900/90 via-slate-800/80 to-transparent'
   },
   {
-    title: 'Bilgisayar',
-    subtitle: 'Güçlü performans, verimli çalışma',
+    title: 'Oto Lastikler',
+    subtitle: 'Yolda maksimum tutuş, güvenli sürüş',
     discount: '⚡ %40 İndirim',
-    image: 'https://images.unsplash.com/photo-1593642632559-0c6d3fc62b89?w=1200',
-    link: '/kategori/bilgisayar'
+    image: 'https://images.unsplash.com/photo-1619642751034-765dfdf7c58e?w=1200',
+    link: '/kategori/oto-lastikler',
+    gradient: 'from-slate-900/90 via-slate-800/80 to-transparent'
   }
 ];
 
@@ -48,7 +58,6 @@ const features = [
   { icon: HiOutlineCreditCard, title: 'Taksit İmkanı', description: '12 aya varan' },
   { icon: HiOutlineSupport, title: '7/24 Destek', description: 'Her zaman yanınızda' },
 ];
-
 
 export default function HomePage() {
   const { 
@@ -70,7 +79,7 @@ export default function HomePage() {
 
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-[138px]">
+      <div className="min-h-screen flex items-center justify-center bg-gray-50 pt-[106px]">
         <div className="text-center">
           <div className="w-12 h-12 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
           <p className="text-gray-500 font-medium">Yükleniyor...</p>
@@ -80,8 +89,8 @@ export default function HomePage() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-[138px]">
-      {/* Hero Slider - Ofis Teması */}
+    <div className="bg-gray-50 min-h-screen pt-[106px]">
+      {/* Hero Slider - Motorsiklet Teması with Dark Overlay */}
       <section className="relative overflow-hidden">
         <Swiper
           modules={[Autoplay, Pagination]}
@@ -100,12 +109,8 @@ export default function HomePage() {
                   className="object-cover"
                   priority={index === 0}
                 />
-                {/* Ofis temalı gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-r from-blue-900/85 via-indigo-800/75 to-slate-900/80" />
-                
-                {/* Dekoratif ofis ikonları */}
-                <div className="absolute top-4 right-4 text-4xl md:text-6xl opacity-20 z-10">💼</div>
-                <div className="absolute bottom-4 left-4 text-3xl md:text-5xl opacity-15 z-10">📊</div>
+                {/* Dark gradient overlay */}
+                <div className={`absolute inset-0 bg-gradient-to-r ${slide.gradient}`} />
                 
                 <div className="absolute inset-0 flex items-center z-20">
                   <div className="max-w-7xl mx-auto px-4 w-full">
@@ -120,10 +125,10 @@ export default function HomePage() {
                         {slide.discount}
                       </span>
                       
-                      {/* Ofis Özel başlığı */}
+                      {/* Motorsiklet başlığı */}
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="text-blue-300 text-sm font-semibold tracking-wider uppercase">
-                          ⚡ Ofis Çözümleri ⚡
+                        <span className="text-red-400 text-sm font-semibold tracking-wider uppercase">
+                          ⚡ Otomotiv Sepeti ⚡
                         </span>
                       </div>
                       
@@ -135,7 +140,7 @@ export default function HomePage() {
                       </p>
                       <Link
                         href={slide.link}
-                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-bold rounded-full hover:from-blue-400 hover:to-indigo-500 transition-all shadow-lg shadow-blue-500/50 hover:shadow-xl hover:shadow-blue-500/60 hover:scale-105 transform"
+                        className="inline-flex items-center gap-1.5 px-4 py-2 bg-white text-gray-900 text-sm font-bold rounded-full hover:bg-gray-100 transition-all shadow-lg hover:shadow-xl hover:scale-105 transform"
                       >
                         Keşfet
                         <HiOutlineChevronRight className="w-4 h-4" />
@@ -147,10 +152,9 @@ export default function HomePage() {
             </SwiperSlide>
           ))}
         </Swiper>
-        
       </section>
 
-     {/* Featured Products - Horizontal Scroll */}
+      {/* Featured Products - Kışın En Güçlü Kaskları */}
       {featuredProducts.length > 0 && (
         <section className="py-8 bg-gradient-to-b from-white to-gray-50">
           <div className="max-w-7xl mx-auto">
@@ -158,11 +162,11 @@ export default function HomePage() {
             <div className="flex items-center justify-between mb-6 px-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-red-500 to-orange-500 flex items-center justify-center shadow-lg shadow-red-500/30">
-                  <HiOutlineFire className="w-5 h-5 text-white" />
+                  <GiFullMotorcycleHelmet className="w-6 h-6 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">Yıl Sonu Özel Fırsatlar</h2>
-                  <p className="text-sm text-gray-500">En çok tercih edilen ürünler</p>
+                  <h2 className="text-xl font-bold text-gray-900">Kışın En Güçlü Kaskları</h2>
+                  <p className="text-sm text-gray-500">En çok tercih edilen modeller</p>
                 </div>
               </div>
               <Link 
@@ -210,10 +214,32 @@ export default function HomePage() {
           </div>
         </section>
       )}
-      <Image unoptimized src={main1} alt="yilsonu" className='w-full h-[17vh] object-contain' />
-      <Image unoptimized src={main2} alt="yilsonu" className='w-full h-[8vh] object-contain' />
 
-      {/* Yazıcı Modelleri - Okul Alışverişi */}
+      {/* Banner 1 - Motorsiklet Görseli */}
+      <section className="py-4 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative h-[160px] md:h-[200px] rounded-2xl overflow-hidden group">
+            <Image
+              src="https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=1200"
+              alt="Motorsiklet Aksesuar"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-slate-900/85 via-slate-800/70 to-transparent flex items-center">
+              <div className="px-6 md:px-10">
+                <span className="text-red-400 text-xs font-bold uppercase tracking-wider">Yeni Sezon</span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mt-1">Güvenlik Ekipmanları</h3>
+                <p className="text-gray-300 text-sm mt-2 max-w-md">Premium kalite, maksimum koruma</p>
+                <Link href="/kategori/giyim-urunleri" className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white text-gray-900 text-sm font-bold rounded-full hover:bg-gray-100 transition-colors">
+                  İncele <HiOutlineChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* School Shopping Products -> Yolculukta Güvenlik */}
       {schoolShoppingProducts.length > 0 && (
         <section className="py-8 bg-gradient-to-b from-gray-50 to-white">
           <div className="max-w-7xl mx-auto">
@@ -221,11 +247,11 @@ export default function HomePage() {
             <div className="flex items-center justify-between mb-6 px-4">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-blue-500/30">
-                  <HiOutlinePrinter className="w-5 h-5 text-white" />
+                  <HiOutlineShieldCheck className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">Yazıcı Modelleri</h2>
-                  <p className="text-sm text-gray-500">Yazıcı modellerimizi keşfedin</p>
+                  <h2 className="text-xl font-bold text-gray-900">Yolculukta Güvenlik</h2>
+                  <p className="text-sm text-gray-500">Koruyucu ekipmanlar</p>
                 </div>
               </div>
               <Link 
@@ -274,8 +300,31 @@ export default function HomePage() {
         </section>
       )}
 
-      <Image unoptimized src={main3} alt="yilsonu" className='w-full h-[17vh] object-contain' />
-      {/* Most Favorited - En Çok Favorilenenler */}
+      {/* Banner 2 - Lastik Görseli */}
+      <section className="py-4 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative h-[160px] md:h-[200px] rounded-2xl overflow-hidden group">
+            <Image
+              src="https://images.unsplash.com/photo-1600712242805-5f78671b24da?w=1200"
+              alt="Oto Lastik"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-l from-slate-900/85 via-slate-800/70 to-transparent flex items-center justify-end">
+              <div className="px-6 md:px-10 text-right">
+                <span className="text-orange-400 text-xs font-bold uppercase tracking-wider">Özel Fırsat</span>
+                <h3 className="text-2xl md:text-3xl font-bold text-white mt-1">Oto Lastikler</h3>
+                <p className="text-gray-300 text-sm mt-2 max-w-md">Tüm mevsim, tüm yollar</p>
+                <Link href="/kategori/oto-lastikler" className="inline-flex items-center gap-2 mt-4 px-4 py-2 bg-white text-gray-900 text-sm font-bold rounded-full hover:bg-gray-100 transition-colors">
+                  İncele <HiOutlineChevronRight className="w-4 h-4" />
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Most Favorited - Motosiklet Kombinleri */}
       {mostFavoritedProducts.length > 0 && (
         <section className="py-8 bg-gradient-to-b from-white to-pink-50/50">
           <div className="max-w-7xl mx-auto">
@@ -286,8 +335,8 @@ export default function HomePage() {
                   <HiOutlineHeart className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">En Çok Favorilenenler</h2>
-                  <p className="text-sm text-gray-500">Müşterilerimizin gözdesi</p>
+                  <h2 className="text-xl font-bold text-gray-900">Motosiklet Kombinleri</h2>
+                  <p className="text-sm text-gray-500">En çok beğenilen ürünler</p>
                 </div>
               </div>
               <Link 
@@ -336,12 +385,36 @@ export default function HomePage() {
         </section>
       )}
 
-       <div className='w-full h-[50vh] rounded-lg overflow-hidden flex items-center px-3'> 
-        <Image unoptimized className='w-full  object-contain rounded-lg' src={main4} alt="yilsonu"  />
-        
-        </div> 
+      {/* Big Banner - Motorsiklet */}
+      <section className="py-6 px-4">
+        <div className="max-w-7xl mx-auto">
+          <div className="relative h-[280px] md:h-[350px] rounded-2xl overflow-hidden group">
+            <Image
+              src="https://images.unsplash.com/photo-1568772585407-9361f9bf3a87?w=1200"
+              alt="Motorsiklet"
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent flex items-end">
+              <div className="p-6 md:p-10 w-full">
+                <span className="text-red-400 text-sm font-bold uppercase tracking-wider">🏁 Yılbaşı Kampanyası</span>
+                <h3 className="text-3xl md:text-4xl font-bold text-white mt-2">Tüm Ürünlerde %45'e Varan İndirim</h3>
+                <p className="text-gray-300 mt-2 max-w-lg">Kask, mont, eldiven ve daha fazlası için kaçırılmayacak fırsatlar</p>
+                <div className="flex gap-3 mt-4">
+                  <Link href="/firsatlar" className="inline-flex items-center gap-2 px-6 py-3 bg-white text-gray-900 font-bold rounded-full hover:bg-gray-100 transition-colors">
+                    Fırsatları Gör
+                  </Link>
+                  <Link href="/kategoriler" className="inline-flex items-center gap-2 px-6 py-3 bg-white/20 text-white font-bold rounded-full hover:bg-white/30 transition-colors backdrop-blur-sm">
+                    Kategoriler
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
-      {/* Selected For You - Sizin İçin Seçtiklerimiz */}
+      {/* Selected For You - Haftanın Öne Çıkan Ürünleri */}
       {selectedForYouProducts.length > 0 && (
         <section className="py-8 bg-gradient-to-b from-pink-50/50 to-gray-50">
           <div className="max-w-7xl mx-auto">
@@ -352,8 +425,8 @@ export default function HomePage() {
                   <HiOutlineSparkles className="w-5 h-5 text-white" />
                 </div>
                 <div>
-                  <h2 className="text-xl font-bold text-gray-900">Sizin İçin Seçtiklerimiz</h2>
-                  <p className="text-sm text-gray-500">Özel seçilmiş ürünler</p>
+                  <h2 className="text-xl font-bold text-gray-900">Haftanın Öne Çıkan Ürünleri</h2>
+                  <p className="text-sm text-gray-500">Sizin için özel seçimler</p>
                 </div>
               </div>
               <Link 
@@ -447,47 +520,45 @@ export default function HomePage() {
         </div>
       </section>
 
-     
-
-      {/* Banner */}
+      {/* Banner Grid */}
       <section className="py-8 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <Link href="/kategori/bilgisayar" className="group">
+            <Link href="/kategori/eldiven" className="group">
               <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1593062096033-9a26b09da705?w=800"
-                  alt="Bilgisayar"
+                  src="https://images.unsplash.com/photo-1617606002806-94e279c22567?w=800"
+                  alt="Eldivenler"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center p-6">
                   <div>
-                    <span className="inline-block px-3 py-1 bg-purple-500 rounded-full text-xs font-semibold text-white mb-2">
-                      Yeni Modeller
+                    <span className="inline-block px-3 py-1 bg-red-500 rounded-full text-xs font-semibold text-white mb-2">
+                      Yeni Koleksiyon
                     </span>
-                    <h3 className="text-2xl font-bold text-white mb-1">Bilgisayar</h3>
-                    <p className="text-white/80 text-sm">Güçlü performans, uygun fiyat</p>
+                    <h3 className="text-2xl font-bold text-white mb-1">Korumalı Eldivenler</h3>
+                    <p className="text-white/80 text-sm">Maksimum tutuş, tam koruma</p>
                   </div>
                 </div>
               </div>
             </Link>
             
-            <Link href="/kategori/tankli-yazici" className="group">
+            <Link href="/kategori/ses-goruntu" className="group">
               <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1612815154858-60aa4c59eaa6?w=800"
-                  alt="Yazıcı"
+                  src="https://images.unsplash.com/photo-1558618047-f4b511b673bc?w=800"
+                  alt="Ses Sistemleri"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-black/70 to-transparent flex items-center p-6">
                   <div>
-                    <span className="inline-block px-3 py-1 bg-cyan-500 rounded-full text-xs font-semibold text-white mb-2">
-                      Özel Fırsatlar
+                    <span className="inline-block px-3 py-1 bg-blue-500 rounded-full text-xs font-semibold text-white mb-2">
+                      Teknoloji
                     </span>
-                    <h3 className="text-2xl font-bold text-white mb-1">Yazıcı</h3>
-                    <p className="text-white/80 text-sm">Profesyonel baskı çözümleri</p>
+                    <h3 className="text-2xl font-bold text-white mb-1">Ses & Görüntü</h3>
+                    <p className="text-white/80 text-sm">Araç içi multimedya sistemleri</p>
                   </div>
                 </div>
               </div>
@@ -496,9 +567,8 @@ export default function HomePage() {
         </div>
       </section>
 
-    
- {/* Features Bar */}
- <section className="bg-white border-b border-gray-100">
+      {/* Features Bar */}
+      <section className="bg-white border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
             {features.map((feature, index) => (
@@ -515,10 +585,9 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-    
 
       {/* Trust Section */}
-      <section className="py-12  px-4 hide bg-gray-900 text-white">
+      <section className="py-12 px-4 bg-gray-900 text-white">
         <div className="max-w-7xl mx-auto text-center">
           <h2 className="text-2xl md:text-3xl font-bold mb-8">Neden Bizi Tercih Etmelisiniz?</h2>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
@@ -541,8 +610,6 @@ export default function HomePage() {
           </div>
         </div>
       </section>
-
-     
 
       <Footer />
     </div>

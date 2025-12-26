@@ -31,27 +31,20 @@ import { useAuth } from '@/context/AuthContext';
 import { useProducts } from '@/context/ProductsContext';
 import PromoBanner from './PromoBanner';
 
-// Animated Logo Component with shine effect
+// Animated Logo Component - iOS Style
 function Logo() {
   return (
-    <Link href="/" className="flex items-center mt-3 mr-2  group">
-     
-        <div className="relative overflow-hidden">
-          
-          {/* Background glow effect */}
-          <Image 
-            src="/logo3.png" 
-            alt="Logo" 
-            width={140} 
-            height={140}
-            priority
-            unoptimized
-          />
-      
-        </div>
-        
-        {/* Sparkle effects */}
-      
+    <Link href="/" className="flex items-center mt-3 mr-2 group">
+      <div className="relative overflow-hidden">
+        <Image 
+          src="/logo3.png" 
+          alt="Logo" 
+          width={140} 
+          height={140}
+          priority
+          unoptimized
+        />
+      </div>
     </Link>
   );
 }
@@ -123,7 +116,7 @@ export default function Navbar() {
       <PromoBanner />
       
       <nav 
-        className={`fixed top-[78px] left-0 right-0 z-40 transition-all duration-300 ${
+        className={`fixed top-[46px] left-0 right-0 z-40 transition-all duration-300 ${
           isScrolled ? 'bg-white shadow-sm border-b border-gray-100' : 'bg-white/80 backdrop-blur-md'
         }`}
       >
@@ -133,7 +126,7 @@ export default function Navbar() {
             <div className="flex items-center">
               <Link
                 href="/sepet"
-                className="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-blue-500 to-blue-600 hover:from-blue-600 hover:to-blue-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 relative"
+                className="w-10 h-10 flex items-center justify-center bg-gradient-to-r from-gray-900 to-gray-800 hover:from-gray-800 hover:to-gray-700 text-white rounded-lg shadow-md hover:shadow-lg transition-all duration-300 transform hover:scale-105 relative"
               >
                 <HiOutlineShoppingBag className="w-5 h-5" />
                 {getCartCount() > 0 && (
@@ -151,17 +144,17 @@ export default function Navbar() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-8">
-              <Link href="/kategori/koltuk-takimi" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Koltuk Takımları
+              <Link href="/kategori/kasklar" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                Kasklar
               </Link>
-              <Link href="/kategori/yatak-odasi" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Yatak Odası
+              <Link href="/kategori/giyim-urunleri" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                Giyim
               </Link>
-              <Link href="/kategori/mutfak" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Mutfak
+              <Link href="/kategori/oto-lastikler" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                Lastikler
               </Link>
-              <Link href="/kategori/beyaz-esya" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
-                Beyaz Eşya
+              <Link href="/kategori/eldiven" className="text-sm font-medium text-gray-600 hover:text-gray-900 transition-colors">
+                Eldivenler
               </Link>
             </div>
 
@@ -205,7 +198,7 @@ export default function Navbar() {
                       type="text"
                       value={searchQuery}
                       onChange={(e) => setSearchQuery(e.target.value)}
-                      placeholder="Mobilya, beyaz eşya ara..."
+                      placeholder="Kask, mont, eldiven ara..."
                       autoFocus
                       className="w-full h-14 pl-12 pr-4 bg-gray-100 border-0 rounded-2xl text-gray-900 placeholder-gray-400 outline-none focus:ring-2 focus:ring-red-500/20 transition-all"
                     />
@@ -223,7 +216,7 @@ export default function Navbar() {
               <div className="space-y-4">
                 <h3 className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Popüler Aramalar</h3>
                 <div className="flex flex-wrap gap-2">
-                  {['Köşe Koltuk', 'Yatak', 'Buzdolabı', 'Çamaşır Makinesi', 'TV Ünitesi', 'Masa Sandalye'].map((term) => (
+                  {['Kask', 'Mont', 'Eldiven', 'Lastik', 'Aksesuar', 'Koruyucu'].map((term) => (
                     <button
                       key={term}
                       onClick={() => {
@@ -423,40 +416,45 @@ export default function Navbar() {
   );
 }
 
-// Mobile Categories Component
+// Mobile Categories Component - Ana sayfa tarzı büyük kartlar
 function MobileCategories({ onClose }) {
   const { categories } = useProducts();
   
   return (
-    <div className="grid grid-cols-4 gap-2">
-      {categories.slice(0, 8).map((category, index) => (
+    <div className="grid grid-cols-2 gap-3">
+      {categories.slice(0, 6).map((category, index) => (
         <motion.div
           key={category.id}
-          initial={{ opacity: 0, scale: 0.8 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: index * 0.03 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: index * 0.05 }}
         >
           <Link
             href={`/kategori/${category.categoryId}`}
             onClick={onClose}
-            className="flex flex-col items-center gap-1.5 p-2 rounded-xl hover:bg-gray-50 transition-colors"
+            className="block group"
           >
-            <div className="w-12 h-12 rounded-xl bg-gray-100 overflow-hidden relative">
+            <div className="relative h-24 rounded-2xl overflow-hidden bg-gray-100 shadow-sm">
               {category.image ? (
                 <Image
                   src={category.image}
                   alt={category.name}
                   fill
-                  className="object-cover"
+                  className="object-cover group-hover:scale-110 transition-transform duration-500"
                   unoptimized
                 />
               ) : (
-                <span className="text-2xl flex items-center justify-center h-full">{category.icon}</span>
+                <div className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center">
+                  <span className="text-4xl">{category.icon}</span>
+                </div>
               )}
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute bottom-0 left-0 right-0 p-3">
+                <h3 className="text-white font-semibold text-sm drop-shadow-lg">
+                  {category.name}
+                </h3>
+              </div>
             </div>
-            <span className="text-[10px] font-medium text-gray-600 text-center line-clamp-2 leading-tight">
-              {category.name}
-            </span>
           </Link>
         </motion.div>
       ))}

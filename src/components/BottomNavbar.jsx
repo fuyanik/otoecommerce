@@ -16,6 +16,19 @@ import {
   HiOutlineHome,
   HiHome
 } from 'react-icons/hi';
+import { 
+  GiFullMotorcycleHelmet, 
+  GiCarWheel,
+  GiGloves,
+  GiSteeringWheel,
+  GiSpeedometer,
+  GiCarKey
+} from 'react-icons/gi';
+import { 
+  FaMotorcycle, 
+  FaCar,
+  FaGasPump
+} from 'react-icons/fa';
 import { useCart } from '@/context/CartContext';
 import { useWishlist } from '@/context/WishlistContext';
 
@@ -55,6 +68,69 @@ const navItems = [
     activeIcon: HiChatAlt2
   },
 ];
+
+// Professional automotive icons from react-icons library
+const icons = [
+  { id: 'helmet', Icon: GiFullMotorcycleHelmet },  // Motorsiklet Kaskı
+  { id: 'motorcycle', Icon: FaMotorcycle },         // Motorsiklet
+  { id: 'gloves', Icon: GiGloves },                 // Eldiven
+  { id: 'tire', Icon: GiCarWheel },                 // Lastik/Tekerlek
+  { id: 'car', Icon: FaCar },                       // Araba
+  { id: 'steering', Icon: GiSteeringWheel },        // Direksiyon
+  { id: 'speedometer', Icon: GiSpeedometer },       // Hız Göstergesi
+  { id: 'gas', Icon: FaGasPump },                   // Benzin Pompası
+  { id: 'carkey', Icon: GiCarKey },                 // Araba Anahtarı
+];
+
+// Sliding icon component with fade in/out
+function SlidingIcons() {
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentIndex((prev) => (prev + 1) % icons.length);
+    }, 7500); // 7.5 saniye
+    return () => clearInterval(interval);
+  }, []);
+
+  const CurrentIcon = icons[currentIndex].Icon;
+
+  return (
+    <div className="relative w-full h-full flex items-center justify-center overflow-hidden">
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={icons[currentIndex].id}
+          initial={{ x: 40, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -40, opacity: 0 }}
+          transition={{ 
+            duration: 0.5, 
+            ease: 'easeInOut'
+          }}
+          className="text-white absolute flex items-center justify-center"
+        >
+          <CurrentIcon className="w-8 h-8" />
+        </motion.div>
+      </AnimatePresence>
+      
+      {/* Subtle glow effect */}
+      <motion.div
+        className="absolute inset-0 rounded-2xl"
+        style={{
+          background: 'radial-gradient(circle at center, rgba(255,255,255,0.1) 0%, transparent 70%)'
+        }}
+        animate={{
+          opacity: [0.3, 0.6, 0.3],
+        }}
+        transition={{
+          duration: 3,
+          repeat: Infinity,
+          ease: 'easeInOut',
+        }}
+      />
+    </div>
+  );
+}
 
 export default function BottomNavbar({ force = false }) {
   const pathname = usePathname();
@@ -164,7 +240,7 @@ export default function BottomNavbar({ force = false }) {
           {leftItems.map(renderNavItem)}
         </div>
 
-        {/* Center - Logo */}
+        {/* Center - Animated Icons with Gradient Background */}
         <div className="flex items-center justify-center px-2">
           <Link 
             href="/"
@@ -173,18 +249,32 @@ export default function BottomNavbar({ force = false }) {
           >
             <motion.div
               whileTap={{ scale: 0.9 }}
-              className="w-16 h-16 rounded-2xl overflow-hidden shadow-lg border border-white " >
-              <div className="w-full h-full rounded-xl overflow-hidden bg-white">
-                <Image
-                  width={100}
-                  height={100}
-                  src="/bottomNavbarLogo3.png"
-                  alt="logo"
-                  className="object-cover w-full h-full"
-                  priority
-                  unoptimized
-                />
+              className="w-16 h-16 rounded-2xl overflow-hidden shadow-xl relative"
+            >
+              {/* Gradient Background */}
+              <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-indigo-900 to-slate-800" />
+              
+              {/* Animated shine effect */}
+              <motion.div
+                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/15 to-transparent -skew-x-12"
+                animate={{
+                  x: ['-100%', '100%'],
+                }}
+                transition={{
+                  duration: 2.5,
+                  repeat: Infinity,
+                  repeatDelay: 4,
+                  ease: 'easeInOut',
+                }}
+              />
+              
+              {/* Sliding Icons */}
+              <div className="relative w-full h-full flex items-center justify-center">
+                <SlidingIcons />
               </div>
+              
+              {/* Border glow */}
+              <div className="absolute inset-0 rounded-2xl border border-white/20" />
             </motion.div>
           </Link>
         </div>

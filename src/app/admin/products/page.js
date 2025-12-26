@@ -1,10 +1,11 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
+import { Suspense } from 'react';
 import { 
   HiOutlineArrowLeft,
   HiOutlinePlus,
@@ -15,12 +16,15 @@ import {
 } from 'react-icons/hi';
 import { getAllProducts, getAllCategories, deleteProduct } from '@/lib/productService';
 
-export default function AdminProductsPage() {
+function AdminProductsContent() {
   const router = useRouter();
+  const searchParams = useSearchParams();
+  const categoryFromUrl = searchParams.get('category');
+  
   const [products, setProducts] = useState([]);
   const [categories, setCategories] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
-  const [selectedCategory, setSelectedCategory] = useState('all');
+  const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl || 'all');
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -33,6 +37,13 @@ export default function AdminProductsPage() {
       router.push('/admin');
     }
   }, [router]);
+  
+  // URL'den kategori değişirse state'i güncelle
+  useEffect(() => {
+    if (categoryFromUrl) {
+      setSelectedCategory(categoryFromUrl);
+    }
+  }, [categoryFromUrl]);
 
   const fetchData = async () => {
     setIsLoading(true);
@@ -356,5 +367,20 @@ export default function AdminProductsPage() {
         </div>
       </main>
     </div>
+  );
+}
+
+export default function AdminProductsPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-gray-50 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-10 h-10 border-4 border-red-500 border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p className="text-gray-500">Ürünler yükleniyor...</p>
+        </div>
+      </div>
+    }>
+      <AdminProductsContent />
+    </Suspense>
   );
 }

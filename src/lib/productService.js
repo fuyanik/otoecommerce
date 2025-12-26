@@ -334,3 +334,65 @@ export const addCategory = async (categoryData) => {
     throw error;
   }
 };
+
+// Kategori güncelle (resim dahil)
+export const updateCategory = async (docId, categoryData, newImageFile = null) => {
+  try {
+    const docRef = doc(db, CATEGORIES_COLLECTION, docId);
+    
+    let imageUrl = categoryData.image;
+    
+    // Yeni görsel varsa yükle
+    if (newImageFile) {
+      const fileName = `categories/${Date.now()}_${Math.random().toString(36).substring(7)}_${newImageFile.name}`;
+      const fileRef = ref(storage, fileName);
+      
+      console.log('Uploading category image:', newImageFile.name);
+      await uploadBytes(fileRef, newImageFile);
+      imageUrl = await getDownloadURL(fileRef);
+      console.log('Category image uploaded:', imageUrl);
+    }
+
+    const updatedCategory = {
+      name: categoryData.name,
+      icon: categoryData.icon,
+      image: imageUrl,
+      description: categoryData.description,
+      order: categoryData.order ?? 999,
+      updatedAt: serverTimestamp()
+    };
+
+    await updateDoc(docRef, updatedCategory);
+    return { id: docId, categoryId: categoryData.categoryId, ...updatedCategory };
+  } catch (error) {
+    console.error('Error updating category:', error);
+    throw error;
+  }
+};
+
+// Sadece kategori resmini güncelle
+export const updateCategoryImage = async (docId, newImageFile) => {
+  try {
+    const docRef = doc(db, CATEGORIES_COLLECTION, docId);
+    
+    // Görseli yükle
+    const fileName = `categories/${Date.now()}_${Math.random().toString(36).substring(7)}_${newImageFile.name}`;
+    const fileRef = ref(storage, fileName);
+    
+    console.log('Uploading category image:', newImageFile.name);
+    await uploadBytes(fileRef, newImageFile);
+    const imageUrl = await getDownloadURL(fileRef);
+    console.log('Category image uploaded:', imageUrl);
+
+    // Sadece image alanını güncelle
+    await updateDoc(docRef, { 
+      image: imageUrl,
+      updatedAt: serverTimestamp()
+    });
+    
+    return imageUrl;
+  } catch (error) {
+    console.error('Error updating category image:', error);
+    throw error;
+  }
+};
