@@ -393,7 +393,7 @@ export default function Navbar() {
                   </div>
                   <div>
                     <p className="text-xs text-gray-500">7/24 Müşteri Hizmetleri</p>
-                    <p className="font-semibold text-gray-900">+90 551 354 56 03</p>
+                    <p className="font-semibold text-gray-900">+90 554 994 89 89</p>
                   </div>
                 </div>
                 <div className="flex items-center gap-3">
