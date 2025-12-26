@@ -194,7 +194,7 @@ export default function AdminDashboard() {
             </div>
             <div>
               <span className="font-bold text-gray-900">Admin Panel</span>
-              <p className="text-xs text-gray-500">Ofis Sepeti Yönetim</p>
+              <p className="text-xs text-gray-500">Otomotiv Sepeti Yönetim</p>
             </div>
           </div>
           <div className="flex items-center gap-3">

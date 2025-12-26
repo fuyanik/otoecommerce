@@ -34,13 +34,13 @@ import PromoBanner from './PromoBanner';
 // Animated Logo Component - iOS Style
 function Logo() {
   return (
-    <Link href="/" className="flex items-center mt-3 mr-2 group">
+    <Link href="/" className="flex items-center mt-0 mr-2 group">
       <div className="relative overflow-hidden">
         <Image 
           src="/logo3.png" 
           alt="Logo" 
-          width={140} 
-          height={140}
+          width={150} 
+          height={150}
           priority
           unoptimized
         />

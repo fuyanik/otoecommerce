@@ -89,7 +89,7 @@ export default function HomePage() {
   }
 
   return (
-    <div className="bg-gray-50 min-h-screen pt-[106px]">
+    <div className="bg-gray-50 min-h-screen pt-[6vh]">
       {/* Hero Slider - Motorsiklet Teması with Dark Overlay */}
       <section className="relative overflow-hidden">
         <Swiper
@@ -527,7 +527,7 @@ export default function HomePage() {
             <Link href="/kategori/eldiven" className="group">
               <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1617606002806-94e279c22567?w=800"
+                  src="https://firebasestorage.googleapis.com/v0/b/otomotivsepeti-8048d.firebasestorage.app/o/categories%2F1766717761447_sst7bb_motor-eldiven.jpg?alt=media&token=b26da729-ec7b-4f05-9cd0-f24307881eeb"
                   alt="Eldivenler"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
@@ -547,7 +547,7 @@ export default function HomePage() {
             <Link href="/kategori/ses-goruntu" className="group">
               <div className="relative h-48 md:h-56 rounded-2xl overflow-hidden">
                 <Image
-                  src="https://images.unsplash.com/photo-1558618047-f4b511b673bc?w=800"
+                  src="https://firebasestorage.googleapis.com/v0/b/otomotivsepeti-8048d.firebasestorage.app/o/categories%2F1766717658526_ukyp0d_sayfa-urun-19-600x400.jpg?alt=media&token=8cb60e38-8c1f-4359-82b3-bb9d6ccdfd48"
                   alt="Ses Sistemleri"
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-500"
