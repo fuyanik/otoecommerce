@@ -54,7 +54,7 @@ const faqs = [
   },
   {
     question: 'Neden EFT/Havale ile ödeme yapmalıyım?',
-    answer: 'EFT/Havale ile ödeme yaptığınızda banka komisyonlarından tasarruf edildiği için size %18 nakit indirimi sağlıyoruz. Bu sayede aynı ürünü daha uygun fiyata satın alabilirsiniz.'
+    answer: 'EFT/Havale ile ödeme yaptığınızda banka komisyonlarından tasarruf edildiği için size %3 nakit indirimi sağlıyoruz. Bu sayede aynı ürünü daha uygun fiyata satın alabilirsiniz.'
   },
   {
     question: 'EFT/Havale işleminde açıklama kısmına ne yazmalıyım?',
@@ -140,7 +140,7 @@ function OrderSummary({ cart, formatPrice, getCartTotal, paymentMethod, showExpa
         <span className="text-xs font-semibold text-gray-500 uppercase tracking-wide">Sipariş Özeti</span>
         <div className="flex items-center gap-2">
           {paymentMethod === 'eft' && (
-            <span className="text-xs text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded">%18 indirim</span>
+            <span className="text-xs text-green-600 font-medium bg-green-50 px-2 py-0.5 rounded">%3 indirim</span>
           )}
           <span className="font-bold text-gray-900">
             {paymentMethod === 'eft' ? formatPrice(discountedTotal) : formatPrice(getCartTotal())}
@@ -574,7 +574,7 @@ export default function CheckoutPage() {
                   Kampanyalı ürünlerde yalnızca <span className="font-semibold text-green-600">Banka Havale / EFT / FAST</span> ödeme yöntemi geçerlidir.
                 </p>
                 <p className="text-xs text-gray-500 mb-4">
-                  Lütfen ödeme yönteminizi değiştirerek %18 nakit indiriminden faydalanın.
+                  Lütfen ödeme yönteminizi değiştirerek %3 nakit indiriminden faydalanın.
                 </p>
                 <button
                   onClick={() => {
@@ -940,7 +940,7 @@ export default function CheckoutPage() {
                   <div>
                         <div className="font-semibold text-gray-900 text-sm">Banka Havale / EFT / FAST</div>
                         <div className="flex items-center gap-1.5">
-                          <span className="text-[10px] font-bold text-green-600 bg-green-100 px-1.5 py-0.5 rounded">%18 nakit indirimi</span>
+                          <span className="text-[10px] font-bold text-green-600 bg-green-100 px-1.5 py-0.5 rounded">%3 nakit indirimi</span>
                           <motion.span 
                             className="text-[10px] text-orange-600 font-medium"
                             animate={{ opacity: [1, 0.5, 1] }}
@@ -952,7 +952,7 @@ export default function CheckoutPage() {
                   </div>
                     </div>
                     <p className="text-[10px] text-gray-600 mt-1.5 leading-relaxed">
-                      Bankalarla yaptığımız anlaşma sayesinde Havale/EFT/FAST ödemelerinde %18 nakit indirimi uygulanmaktadır.
+                      Bankalarla yaptığımız anlaşma sayesinde Havale/EFT/FAST ödemelerinde %3 nakit indirimi uygulanmaktadır.
                     </p>
                     {paymentMethod === 'eft' && (
                       <div className="mt-2 p-1.5 bg-green-100 rounded-lg">
