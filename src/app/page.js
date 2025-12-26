@@ -211,6 +211,18 @@ export default function HomePage() {
               <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-pink-50/50 to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
             </div>
+
+            {/* Tümünü Gör Butonu */}
+            <div className="flex justify-start mt-5 px-4">
+              <Link
+                href="/koleksiyon/super-indirimler"
+                className="group relative inline-flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-purple-500 to-violet-600 text-white text-sm font-semibold rounded-full shadow-md shadow-purple-500/25 hover:shadow-lg hover:shadow-purple-500/35 transition-all hover:scale-105 overflow-hidden"
+              >
+                <span className="relative z-10">Tümünü Gör</span>
+                <HiOutlineChevronRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-violet-600 to-purple-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
+            </div>
           </div>
         </section>
       )}
@@ -272,6 +284,18 @@ export default function HomePage() {
               {/* Gradient Fade Effects */}
               <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-gray-50 to-transparent z-10 pointer-events-none" />
+            </div>
+
+            {/* Tümünü Gör Butonu */}
+            <div className="flex justify-start mt-5 px-4">
+              <Link
+                href="/koleksiyon/en-guclukasklar"
+                className="group relative inline-flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-red-500 to-orange-500 text-white text-sm font-semibold rounded-full shadow-md shadow-red-500/25 hover:shadow-lg hover:shadow-red-500/35 transition-all hover:scale-105 overflow-hidden"
+              >
+                <span className="relative z-10">Tümünü Gör</span>
+                <HiOutlineChevronRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
             </div>
           </div>
         </section>
@@ -358,6 +382,18 @@ export default function HomePage() {
               <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-gray-50 to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-white to-transparent z-10 pointer-events-none" />
             </div>
+
+            {/* Tümünü Gör Butonu */}
+            <div className="flex justify-start mt-5 px-4">
+              <Link
+                href="/koleksiyon/guvenlik-ekipmanlari"
+                className="group relative inline-flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-blue-500 to-indigo-600 text-white text-sm font-semibold rounded-full shadow-md shadow-blue-500/25 hover:shadow-lg hover:shadow-blue-500/35 transition-all hover:scale-105 overflow-hidden"
+              >
+                <span className="relative z-10">Tümünü Gör</span>
+                <HiOutlineChevronRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-600 to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
+            </div>
           </div>
         </section>
       )}
@@ -442,6 +478,18 @@ export default function HomePage() {
               {/* Gradient Fade Effects */}
               <div className="absolute left-0 top-0 bottom-0 w-8 bg-gradient-to-r from-white to-transparent z-10 pointer-events-none opacity-0 group-hover:opacity-100 transition-opacity" />
               <div className="absolute right-0 top-0 bottom-0 w-8 bg-gradient-to-l from-pink-50/50 to-transparent z-10 pointer-events-none" />
+            </div>
+
+            {/* Tümünü Gör Butonu */}
+            <div className="flex justify-start mt-5 px-4">
+              <Link
+                href="/koleksiyon/motosiklet-kombinleri"
+                className="group relative inline-flex items-center gap-1.5 px-5 py-2 bg-gradient-to-r from-pink-500 to-rose-500 text-white text-sm font-semibold rounded-full shadow-md shadow-pink-500/25 hover:shadow-lg hover:shadow-pink-500/35 transition-all hover:scale-105 overflow-hidden"
+              >
+                <span className="relative z-10">Tümünü Gör</span>
+                <HiOutlineChevronRight className="w-4 h-4 relative z-10 group-hover:translate-x-0.5 transition-transform" />
+                <div className="absolute inset-0 bg-gradient-to-r from-rose-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity" />
+              </Link>
             </div>
           </div>
         </section>
